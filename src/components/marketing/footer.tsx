@@ -9,7 +9,7 @@ const TELEGRAM_URL = 'https://t.me/+coaN5Ihjte9jNzZl'
 const X_URL = 'https://x.com/0xdinglv'
 const XHS_URL = 'https://xhslink.com/m/19FI1djnItu'
 
-export function Footer({ theme }: { theme: 'light' | 'dark' }) {
+export function Footer() {
   const { t } = useTranslation()
   const year = new Date().getFullYear()
 
@@ -55,7 +55,7 @@ export function Footer({ theme }: { theme: 'light' | 'dark' }) {
           &copy; {year} {t('common.appName')}. {t('marketing.footerRights')}
         </p>
         <div className="flex items-center gap-1">
-          <ThemeToggle theme={theme} />
+          <ThemeToggle />
           <LangSwitch />
         </div>
       </div>

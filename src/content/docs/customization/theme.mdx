@@ -2,37 +2,37 @@
 title: "主题"
 ---
 
-明暗主题切换与配色。解析顺序:**显式选择(cookie)> 系统偏好 > 深色**(品牌默认),
-配色用 CSS 变量集中管理。
+明暗主题切换与配色。全站（营销页、App、文档）共用一套 [next-themes](https://github.com/pacocoursey/next-themes)
+状态：**显式选择 > 系统偏好 > 深色**，切换只改 `<html>` class 和 `localStorage`，不产生服务端请求。
 
-> **fork 后你要改哪:** 换配色改 `src/styles/app.css` 的 CSS 变量;改兜底明暗改
-> `src/server/preferences.ts` + `__root.tsx` 里的 boot script。
+> **fork 后你要改哪:** 换配色改 `src/styles/app.css` 的 CSS 变量；改默认主题改
+> `src/features/theme/provider.tsx` 的 `defaultTheme`。
 
 ## 工作原理
 
-- **偏好**:主题存在 `theme` cookie 里。`getPreferences`(`src/server/preferences.ts`)读取
-  它,SSR 按 cookie 渲染,无 cookie 时兜底深色。
-- **系统偏好**:`__root.tsx` 的 `<head>` 里有一段首绘前的内联脚本——**没有 cookie** 且
-  `prefers-color-scheme: light` 时把 `<html>` 翻成浅色(无闪烁)。它刻意不写 cookie:
-  没做过选择的访客持续跟随系统,点过切换按钮才锁定。
-- **应用**:`__root.tsx` 把主题作为 class 加到 `<html class={theme}>`(带
-  `suppressHydrationWarning`,因为脚本可能在水合前改过 class)。
-- **切换**:`ThemeToggle`(`src/features/theme/theme-toggle.tsx`)点一下写入 cookie
-  (有效期一年)并即时生效;此后 cookie 永远优先于系统偏好。
-- **客户端读真实主题**:loader 的值在「无 cookie + 系统浅色」时是错的,依赖主题渲染的
-  组件(切换按钮图标、Toaster)用 `useResolvedTheme` 在挂载后读 DOM。
+- **Provider**：`src/features/theme/provider.tsx` 封装 `next-themes`，配置
+  `attribute="class"`、`defaultTheme="system"`、`storageKey="theme"`。
+- **首绘**：next-themes 在 `<body>` 顶部注入一段内联脚本，在内容绘制前读取
+  `localStorage` / 系统偏好并给 `<html>` 加上 `light` 或 `dark`，所以没有闪烁。
+- **切换**：`ThemeToggle`（`src/features/theme/theme-toggle.tsx`）只调
+  `setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')`；不写 cookie，也不调
+  `router.invalidate()`。
+- **docs 同步**：文档页的 `RootProvider` 设了 `theme={{ enabled: false }}`，复用根节点的
+  next-themes context；文档站右上角的主题按钮和主站是同一个 store。
+- **Toaster**：`ThemedToaster` 用 `useTheme().resolvedTheme` 跟随当前主题。
 
 ## 改配色
 
-配色集中在 `src/styles/app.css` 的 CSS 变量:
+配色集中在 `src/styles/app.css` 的 CSS 变量：
 
-- `:root` 定义浅色令牌(`--bg`、`--fg`、`--accent` 等);
-- `:root.dark, .dark` 覆盖为深色值;
-- `@theme inline` 把这些变量映射成 Tailwind v4 的 `--color-*`,组件里就能用
+- `:root` 定义浅色令牌（`--bg`、`--fg`、`--accent` 等）；
+- `:root.dark, .dark` 覆盖为深色值；
+- `@theme inline` 把这些变量映射成 Tailwind v4 的 `--color-*`，组件里就能用
   `bg-background`、`text-fg-2` 这类类名。
 
-改品牌色只需动这几处变量,明暗两套各改一遍即可。
+改品牌色只需动这几处变量，明暗两套各改一遍即可。
 
 <Callout type="info">
-想默认浅色?把 `getPreferences` 里的判断反过来(默认 `light`,仅显式 `dark` cookie 才深色)。
+想默认浅色？把 `provider.tsx` 里的 `defaultTheme` 改成 `"light"`。用户一旦点过切换，
+`localStorage` 里的显式选择仍然优先。
 </Callout>

@@ -10,7 +10,7 @@
  * contain secrets or internals; sanitize before throwing.
  */
 import { useEffect } from 'react'
-export function ErrorPage({ error, reset }: { error: Error; reset: () => void }) {
+export function ErrorPage({ error, reset }: { error: unknown; reset: () => void }) {
   // document.title, not a rendered <title>: the root head() already emits one,
   // and React 19 hoisting would append a second (invalid, and browsers keep the first).
   useEffect(() => {
@@ -24,7 +24,7 @@ export function ErrorPage({ error, reset }: { error: Error; reset: () => void })
       <p className="m-0 max-w-[30em] text-base leading-relaxed text-fg-2">
         An unexpected error occurred. Try again, or head back to safe harbor.
       </p>
-      {import.meta.env.DEV && (
+      {import.meta.env.DEV && error instanceof Error && (
         <pre className="max-w-[40em] overflow-auto rounded-[6px] bg-bg-2 p-4 text-left text-[13px] text-fg-2">
           {error.message}
         </pre>

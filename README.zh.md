@@ -64,7 +64,7 @@ FlareStarter 只交付能跑的东西：仓库里的每个功能都是真实实�
 | **SEO** | 按语言生成的 sitemap、`hreflang`、canonical URL、OpenGraph 标签、`robots.txt`，以及需登录页面的 `noindex` 处理。 |
 | **AI 友好** | **部署侧**：内置 [`llms.txt`](https://flarestarter.com/llms.txt) 索引与 [`llms-full.txt`](https://flarestarter.com/llms-full.txt) 全文语料，每个文档页均可经 `/docs-md/*` 取到去除 frontmatter 的干净 Markdown，`robots.txt` 主动指向二者——便于 ChatGPT / Perplexity 等 AI 爬虫索引、引用你的内容。**代码侧**：[`AGENTS.md`](AGENTS.md)（+ 自动导入的 [`CLAUDE.md`](CLAUDE.md)）作为单一事实来源，让 Claude Code / Codex 等编码 agent 即刻读懂本仓库、直接在其上开发。 |
 | **后台** | better-auth admin 插件：角色管理、账号封禁、用户模拟登录 (Impersonation)、可搜索/分页的用户表，以及统计仪表盘（注册数 / 活跃数 / 订阅）——全部基于真实数据，无任何虚构指标。 |
-| **主题** | 暗色优先设计 + 亮/暗模式切换，用户偏好经 cookie 持久化。 |
+| **主题** | 暗色优先设计 + 亮/暗模式切换，偏好存 `localStorage`（零服务端请求，与文档站共享）。 |
 | **安全 & 可观测性** | Turnstile bot 防护、安全响应头 + 生产环境 CSP、认证端点限流（D1 存储）、启动期环境变量校验（fail-fast）；CF Web Analytics（无 cookie）与 Sentry 错误上报——均可选，留空即关。见 [安全文档](https://flarestarter.com/docs/platform/security) / [可观测性文档](https://flarestarter.com/docs/platform/observability)。 |
 | **运维 (Dev/Ops)** | Cron Triggers 定时任务参考实现（每日清理过期 session/token/限流行）、local/staging/prod 多环境分离、GitHub Actions CI（lint + typecheck + 构建）。 |
 
@@ -142,7 +142,7 @@ src/
     maintenance/   # Cron 定时清理任务 (过期 session/token/限流行)
     theme/         # 暗色优先的主题切换
   routes/
-    {-$locale}/    # 带可选语言前缀的页面：/、/zh、/admin、/app …
+    {-$locale}/    # 带可选语言前缀的页面：/、/zh、/admin、/app …；(pages)/ 共用营销导航/页脚
     api/, docs/, docs-md/, llms.txt, robots.txt, sitemap.xml   # 顶级路由（locale 组之外）
   content/docs/    # 站内文档内容 (fumadocs 的 mdx 源)
   db/              # Drizzle schema barrel + client + 迁移逻辑

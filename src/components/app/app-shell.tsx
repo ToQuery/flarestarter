@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { Link, getRouteApi } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { Home, Sparkles, Settings, Gauge, Users, Menu, ClipboardList, PanelLeftClose, PanelLeftOpen, Heart, MessageSquare } from 'lucide-react'
 import { Logo } from '@/components/brand/logo'
 import { Badge } from '@/components/ui/badge'
@@ -8,8 +8,6 @@ import { LangSwitch } from '@/features/i18n/lang-switch'
 import { useTranslation } from '@/features/i18n/provider'
 import { PaymentFailedBanner } from '@/features/billing/components/payment-failed-banner'
 import { UserMenu } from '@/components/app/user-menu'
-
-const rootRoute = getRouteApi('__root__')
 
 const COLLAPSE_KEY = 'sidebar-collapsed'
 
@@ -44,7 +42,6 @@ export function AppShell({
   paymentFailed?: boolean
   children: ReactNode
 }) {
-  const { theme } = rootRoute.useLoaderData()
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
@@ -178,7 +175,7 @@ export function AppShell({
               {isPro ? t('billing.pro') : t('billing.free')}
             </Badge>
           )}
-          <ThemeToggle theme={theme} />
+          <ThemeToggle />
           <LangSwitch />
         </div>
         <div className="app-main">

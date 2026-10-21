@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import type { Context } from 'hono'
 import { env } from '@/lib/env'
 import { getAvatar } from '@/features/storage/storage.server'
 
@@ -7,15 +7,15 @@ import { getAvatar } from '@/features/storage/storage.server'
  * route is the read side — `user.image` points here. Avatars are non-sensitive,
  * so no auth gate; the userId is the last path segment.
  */
-const handler = async ({ request }: { request: Request }) => {
+export async function avatarHandler(c: Context) {
   let userId = ''
   try {
-    userId = decodeURIComponent(new URL(request.url).pathname.split('/').pop() ?? '')
+    userId = decodeURIComponent(c.req.param('userId') ?? '')
   } catch {
     // 畸形百分号编码（如 /%E0%A4%A）→ 404，而不是未捕获的 URIError 500
   }
   const object = userId ? await getAvatar(env.BUCKET, userId) : null
-  if (!object) return new Response('Not found', { status: 404 })
+  if (!object) return c.text('Not found', 404)
 
   const headers = new Headers()
   if (object.httpMetadata?.contentType) headers.set('Content-Type', object.httpMetadata.contentType)
@@ -23,7 +23,3 @@ const handler = async ({ request }: { request: Request }) => {
   headers.set('Cache-Control', 'public, max-age=60') // short: url is cache-busted on re-upload
   return new Response(object.body, { headers })
 }
-
-export const Route = createFileRoute('/api/avatars/$')({
-  server: { handlers: { GET: handler } },
-})

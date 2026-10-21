@@ -19,7 +19,7 @@ title: "Storage (R2)"
   (`src/features/storage/storage.ts`),以每用户一个 key 写入 R2
   (`avatars/<userId>` —— 重复上传即覆盖,不产生孤儿对象),再把 `user.image` 指向读取路由。
 - **读** —— R2 对象非公开,所以由 `GET /api/avatars/<userId>`
-  (`src/routes/api/avatars/$.ts`)把对象流式返回,并从 R2 的 `httpMetadata` 恢复
+  (`src/server/api/handlers/avatars.ts`)把对象流式返回,并从 R2 的 `httpMetadata` 恢复
   `Content-Type`。存储的 URL 每次上传都会加缓存击穿参数(`?v=…`)。
 - **校验**放在纯函数 `storage.ts` 里,浏览器选择器和服务端 handler 共用同一套规则。
   限制:2 MB;PNG/JPEG/WebP/GIF。

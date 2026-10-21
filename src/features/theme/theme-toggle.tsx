@@ -1,40 +1,31 @@
-import { useRouter } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import { Sun, Moon } from 'lucide-react'
 import { useTranslation } from '@/features/i18n/provider'
-import { useResolvedTheme } from '@/features/theme/use-resolved-theme'
+import { useTheme } from '@/features/theme/provider'
 
-export function ThemeToggle({ theme }: { theme: 'light' | 'dark' }) {
-  const router = useRouter()
+export function ThemeToggle() {
   const { t } = useTranslation()
-  // trust the DOM, not the loader: a cookie-less light-OS visitor is on light
-  // even though SSR said dark (see the boot script in __root)
-  const resolved = useResolvedTheme(theme)
-
-  function toggle() {
-    const next = resolved === 'dark' ? 'light' : 'dark'
-    document.cookie = `theme=${next}; path=/; max-age=31536000`
-    // apply immediately: React's vDOM may still think the class is unchanged
-    // when the boot script flipped it (cookie-less visitor), so diffing alone
-    // wouldn't touch the DOM
-    document.documentElement.classList.remove('light', 'dark')
-    document.documentElement.classList.add(next)
-    // Keep next-themes' store in sync so the docs theme switch reflects this too.
-    try {
-      localStorage.setItem('theme', next)
-    } catch {
-      // ignore (e.g. storage disabled)
-    }
-    router.invalidate()
-  }
+  const { resolvedTheme, setTheme } = useTheme()
+  // next-themes resolves the theme on the client only; render a stable
+  // placeholder until mounted so SSR and hydration agree.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const current = mounted && resolvedTheme === 'light' ? 'light' : 'dark'
 
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={() => setTheme(current === 'dark' ? 'light' : 'dark')}
       aria-label={t('common.toggleTheme')}
       className="inline-flex h-[38px] w-[38px] items-center justify-center rounded-lg border border-transparent text-fg-2 transition-colors hover:bg-bg-alt hover:text-foreground"
     >
-      {resolved === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+      {!mounted ? (
+        <span className="h-[18px] w-[18px]" aria-hidden="true" />
+      ) : current === 'dark' ? (
+        <Sun size={18} />
+      ) : (
+        <Moon size={18} />
+      )}
     </button>
   )
 }

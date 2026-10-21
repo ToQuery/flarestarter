@@ -2,18 +2,16 @@ import { createFileRoute, getRouteApi } from '@tanstack/react-router'
 import { localeHead } from '@/features/seo/seo'
 import { getOrigin } from '@/features/seo/seo.fns'
 import type { Locale } from '@/features/i18n/locale'
-import { SiteNav } from '@/components/marketing/site-nav'
 import { Hero } from '@/components/marketing/hero'
 import { TechStrip } from '@/components/marketing/tech-strip'
 import { Features } from '@/components/marketing/features'
 import { FeatureGrid } from '@/components/marketing/feature-grid'
 import { AgentSection } from '@/components/marketing/agent-section'
 import { CTA } from '@/components/marketing/cta'
-import { Footer } from '@/components/marketing/footer'
 
-const rootRoute = getRouteApi('__root__')
+const marketingRoute = getRouteApi('/{-$locale}/(pages)')
 
-export const Route = createFileRoute('/{-$locale}/')({
+export const Route = createFileRoute('/{-$locale}/(pages)/')({
   loader: async () => ({ origin: await getOrigin() }),
   head: ({ loaderData, params }) => {
     const origin = loaderData?.origin ?? ''
@@ -34,19 +32,16 @@ export const Route = createFileRoute('/{-$locale}/')({
 })
 
 function Home() {
-  const { theme, user } = rootRoute.useLoaderData()
-  const loggedIn = !!user
+  const { loggedIn } = marketingRoute.useLoaderData()
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <SiteNav theme={theme} loggedIn={loggedIn} />
+    <>
       <Hero loggedIn={loggedIn} />
       <TechStrip />
       <Features />
       <FeatureGrid />
       <AgentSection />
       <CTA loggedIn={loggedIn} />
-      <Footer theme={theme} />
-    </div>
+    </>
   )
 }

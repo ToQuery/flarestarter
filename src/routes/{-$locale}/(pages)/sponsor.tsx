@@ -1,18 +1,14 @@
-import { createFileRoute, getRouteApi } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { localeHead } from '@/features/seo/seo'
 import { getOrigin } from '@/features/seo/seo.fns'
-import { SiteNav } from '@/components/marketing/site-nav'
-import { Footer } from '@/components/marketing/footer'
 import { SponsorPanel } from '@/features/sponsor/components/sponsor-panel'
 import { SponsorsWall } from '@/features/sponsor/components/sponsors-wall'
 import { getSponsorConfig, getSponsorManageLink } from '@/features/sponsor/actions'
 import { useTranslation } from '@/features/i18n/provider'
 import type { Locale } from '@/features/i18n/locale'
 
-const rootRoute = getRouteApi('__root__')
-
-export const Route = createFileRoute('/{-$locale}/sponsor')({
+export const Route = createFileRoute('/{-$locale}/(pages)/sponsor')({
   validateSearch: (s: Record<string, unknown>): { status?: 'success'; session_id?: string } => ({
     status: s.status === 'success' ? 'success' : undefined,
     session_id: typeof s.session_id === 'string' ? s.session_id : undefined,
@@ -43,7 +39,6 @@ export const Route = createFileRoute('/{-$locale}/sponsor')({
 function SponsorPage() {
   const { configured, wechatEnabled, sponsors } = Route.useLoaderData()
   const { status, session_id } = Route.useSearch()
-  const { theme, user } = rootRoute.useLoaderData()
   const { t } = useTranslation()
   const [manageUrl, setManageUrl] = useState<string | null>(null)
 
@@ -56,9 +51,7 @@ function SponsorPage() {
   }, [status, session_id])
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <SiteNav theme={theme} loggedIn={!!user} />
-      <main className="mx-auto max-w-5xl px-4 py-16">
+    <main className="mx-auto max-w-5xl px-4 py-16">
         {status === 'success' ? (
           <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-8 text-center">
             <h1 className="text-2xl font-semibold">{t('sponsor.successTitle')}</h1>
@@ -95,9 +88,7 @@ function SponsorPage() {
             </div>
           </>
         )}
-        <SponsorsWall sponsors={sponsors} />
-      </main>
-      <Footer theme={theme} />
-    </div>
+      <SponsorsWall sponsors={sponsors} />
+    </main>
   )
 }

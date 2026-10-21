@@ -1,5 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { env } from '@/lib/env'
+import type { Context } from 'hono'
 import { createDb } from '@/db/client'
 import { applyDomainEvent, handleWebhook } from '@/features/billing/billing.server'
 import { createStripeProvider } from '@/features/billing/stripe'
@@ -9,9 +8,11 @@ import { constructSponsorEvent } from '@/features/sponsor/sponsor.stripe'
 import { translateSponsorEvent, isExclusiveSponsorEvent } from '@/features/sponsor/webhook'
 import { applySponsorEvent } from '@/features/sponsor/sponsor.server'
 
-const handler = async ({ request }: { request: Request }) => {
+export async function stripeHandler(c: Context<{ Bindings: Cloudflare.Env }>) {
+  const env = c.env
+  const request = c.req.raw
   const rawBody = await request.text()
-  const signature = request.headers.get('stripe-signature') ?? ''
+  const signature = c.req.header('stripe-signature') ?? ''
   const db = createDb(env.DB)
 
   // Verify once, then branch: sponsorship events are handled here; everything
@@ -20,7 +21,7 @@ const handler = async ({ request }: { request: Request }) => {
   try {
     event = await constructSponsorEvent(env, rawBody, signature)
   } catch {
-    return new Response('error', { status: 400 })
+    return c.text('error', 400)
   }
 
   const se = translateSponsorEvent(event)
@@ -29,11 +30,11 @@ const handler = async ({ request }: { request: Request }) => {
       await applySponsorEvent(db, se, Date.now())
     } catch (err) {
       console.error('[sponsor] webhook handling failed', err)
-      return new Response('error', { status: 500 })
+      return c.text('error', 500)
     }
     // created/renewed/canceled are verifiably sponsorship-only; refund/dispute
     // events must ALSO reach billing (lifetime-purchase refunds live there).
-    if (isExclusiveSponsorEvent(se)) return new Response('ok', { status: 200 })
+    if (isExclusiveSponsorEvent(se)) return c.text('ok', 200)
   }
 
   // Lifetime purchases must end a still-billing subscription at Stripe — wire the
@@ -42,7 +43,7 @@ const handler = async ({ request }: { request: Request }) => {
   const provider = createStripeProvider(env)
   const status = await handleWebhook(
     db,
-    async () => translateStripeEvent(event),   // reuse verified event, no re-parse
+    async () => translateStripeEvent(event), // reuse verified event, no re-parse
     rawBody,
     signature,
     Date.now(),
@@ -51,7 +52,3 @@ const handler = async ({ request }: { request: Request }) => {
   )
   return new Response(status === 200 ? 'ok' : 'error', { status })
 }
-
-export const Route = createFileRoute('/api/webhooks/stripe')({
-  server: { handlers: { POST: handler } },
-})

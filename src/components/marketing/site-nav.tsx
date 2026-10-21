@@ -10,7 +10,7 @@ import { useTranslation } from '@/features/i18n/provider'
 const GITHUB_URL = 'https://github.com/flarestarter/flarestarter'
 
 /** Sticky marketing header. Links + CTA collapse into a hamburger menu on mobile. */
-export function SiteNav({ theme, loggedIn }: { theme: 'light' | 'dark'; loggedIn: boolean }) {
+export function SiteNav({ loggedIn }: { loggedIn: boolean }) {
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(false)
 
@@ -58,7 +58,7 @@ export function SiteNav({ theme, loggedIn }: { theme: 'light' | 'dark'; loggedIn
         {/* desktop */}
         <div className="hidden items-center gap-1 md:flex">{navLinks}</div>
         <div className="flex items-center gap-1">
-          <ThemeToggle theme={theme} />
+          <ThemeToggle />
           <LangSwitch />
         </div>
         <a

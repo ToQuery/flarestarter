@@ -5,7 +5,7 @@ title: "国际化（i18n）与 SEO"
 ## 路由
 
 - 语言走路径前缀（TanStack `{-$locale}` 可选参数）：默认 `en` 无前缀（`/`、`/pricing`），`zh` 带前缀（`/zh`、`/zh/pricing`）。
-- locale 来自路由 param（非 cookie）；主题仍 cookie。
+- locale 来自路由 param（非 cookie）；主题偏好存 `localStorage`（`next-themes`）。
 - `/en/...` 会 307 规范化到无前缀路径；未知语言 → 404。
 - 本地化页面在 `src/routes/{-$locale}/`；`api/`、`sitemap.xml`、`robots.txt` 在根、不本地化。
 - 切换语言（LangSwitch）保留当前子路径。

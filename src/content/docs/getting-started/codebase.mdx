@@ -46,8 +46,8 @@ FlareStarter 采用现代化的全栈架构设计，前端使用 **TanStack Star
 
 ### 2. 文件路由 (`src/routes/*`)
 我们使用 **TanStack Router** 进行基于文件的路由映射。
-- `src/routes/api/*` 用于定义供外部调用的标准 RESTful API 接口。
-- 绝大多数页面被放置在 `{-$locale}/` 组内，以便开箱即用支持多语言。
+- 所有 `/api/*` 请求由 `src/routes/api/$.ts` 统一挂载到 `src/server/api/` 下的 Hono 应用；新增接口在 `src/server/api/app.ts` 注册 handler。
+- 绝大多数页面被放置在 `{-$locale}/` 组内，以便开箱即用支持多语言。营销页共用 `(pages)/route.tsx` 的导航/页脚。
 
 ### 3. 环境隔离 (`@/lib/env`)
 所有环境变量的读取**必须**通过 `@/lib/env` 进行。我们通过 Zod 校验了环境变量的完整性，这样在部署出错时能第一时间获得报错，而不是在运行时崩溃。

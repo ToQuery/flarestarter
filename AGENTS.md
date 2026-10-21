@@ -9,7 +9,8 @@ FlareStarter — a Cloudflare-native SaaS starter on **TanStack Start + Cloudfla
 ## Structure
 
 - `src/features/*` — vertical feature slices, each self-contained (schema / server fns / actions / components): `admin`, `analytics`, `audience`, `auth`, `billing`, `changelog`, `docs`, `email`, `i18n`, `maintenance`, `notifications`, `seo`, `storage`, `theme`, `waitlist`.
-- `src/routes/{-$locale}/` — file-based routes with an optional locale prefix (`/` = en, `/zh` = zh). Top-level routes (`api`, `sitemap`, `robots`, `docs`) live outside the locale group.
+- `src/server/api/` — Hono app + handlers; `src/routes/api/$.ts` mounts it with one `ANY` handler.
+- `src/routes/{-$locale}/` — file-based routes with an optional locale prefix (`/` = en, `/zh` = zh). Marketing pages live in `(pages)/route.tsx` (shared nav/footer). Top-level routes (`api`, `sitemap`, `robots`, `docs`) live outside the locale group.
 - `src/components/` — `ui/` primitives + `marketing/` landing + `app/` shell.
 - `src/db/` — Drizzle client + `schema.ts` barrel; tables in `src/db/tables/` and feature `*.schema.ts`.
 - `src/content/docs/` — in-app docs, grouped into `getting-started/`, `features/`, `platform/`, `customization/` (read `platform/cf-gotchas.mdx` before touching Workers/D1 specifics).
@@ -21,6 +22,8 @@ FlareStarter — a Cloudflare-native SaaS starter on **TanStack Start + Cloudfla
 - **DB:** Drizzle + D1 migrations — `pnpm db:generate` then `pnpm db:migrate:local`; register new tables in `src/db/schema.ts`.
 - **No mock, graceful degradation:** optional integrations (Resend, Stripe, Turnstile, Sentry, analytics) switch off when their env keys are absent — keep that behavior.
 - **Routes:** after adding a route, run `pnpm build` before `pnpm typecheck` (the route tree is generated at build).
+- **API:** add endpoints to `src/server/api/app.ts` + a handler file; keep `/api/*` in Hono and server functions as `createServerFn`.
+- **Theme:** use `useTheme()` from `@/features/theme/provider` (next-themes); never write a theme cookie or call `router.invalidate()` just to toggle.
 - **Tests:** Vitest — node pool (`*.node.test.ts`) for pure logic, workers pool (`*.workers.test.ts`) for D1; the workers pool does NOT auto-apply migrations (hand-create tables in `beforeAll`).
 
 ## Commands

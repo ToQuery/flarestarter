@@ -1,5 +1,5 @@
 import { useState, type ReactNode, type ComponentType } from 'react'
-import { Link, getRouteApi } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { ChevronLeft, Eye, EyeOff } from 'lucide-react'
 import { Logo } from '@/components/brand/logo'
 import { ThemeToggle } from '@/features/theme/theme-toggle'
@@ -7,8 +7,6 @@ import { LangSwitch } from '@/features/i18n/lang-switch'
 import { useTranslation } from '@/features/i18n/provider'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
-const rootRoute = getRouteApi('__root__')
 
 /** Edge-Terminal auth shell: dotted-grid backdrop, logo-is-home header
  *  (a back-chevron slides in on hover/focus), centered terminal card. */
@@ -21,7 +19,6 @@ export function AuthCard({
   subtitle?: ReactNode
   children: ReactNode
 }) {
-  const { theme } = rootRoute.useLoaderData()
   return (
     <div className="auth-wrap grid-bg">
       <div className="flex h-16 items-center gap-3 border-b border-border px-4 md:px-7">
@@ -33,7 +30,7 @@ export function AuthCard({
         </Link>
         <div className="flex-1" />
         <div className="flex items-center gap-1">
-          <ThemeToggle theme={theme} />
+          <ThemeToggle />
           <LangSwitch />
         </div>
       </div>

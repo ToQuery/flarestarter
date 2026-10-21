@@ -14,21 +14,16 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as LlmsFullDottxtRouteImport } from './routes/llms-full[.]txt'
 import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$locale}/route'
-import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
-import { Route as Char123LocaleChar125WaitlistRouteImport } from './routes/{-$locale}/waitlist'
-import { Route as Char123LocaleChar125TermsRouteImport } from './routes/{-$locale}/terms'
-import { Route as Char123LocaleChar125SponsorRouteImport } from './routes/{-$locale}/sponsor'
-import { Route as Char123LocaleChar125PrivacyRouteImport } from './routes/{-$locale}/privacy'
-import { Route as Char123LocaleChar125PricingRouteImport } from './routes/{-$locale}/pricing'
-import { Route as Char123LocaleChar125ChangelogRouteImport } from './routes/{-$locale}/changelog'
 import { Route as DocsSplatRouteImport } from './routes/docs/$'
 import { Route as DocsMdSplatRouteImport } from './routes/docs-md/$'
-import { Route as ApiSearchRouteImport } from './routes/api/search'
+import { Route as ApiSplatRouteImport } from './routes/api/$'
 import { Route as AdminWaitlistDotcsvRouteImport } from './routes/admin/waitlist[.]csv'
 import { Route as AdminSponsorsDotcsvRouteImport } from './routes/admin/sponsors[.]csv'
 import { Route as Char123LocaleChar125AdminRouteRouteImport } from './routes/{-$locale}/admin/route'
+import { Route as Char123LocaleChar125pagesRouteRouteImport } from './routes/{-$locale}/(pages)/route'
 import { Route as Char123LocaleChar125AppIndexRouteImport } from './routes/{-$locale}/app/index'
 import { Route as Char123LocaleChar125AdminIndexRouteImport } from './routes/{-$locale}/admin/index'
+import { Route as Char123LocaleChar125pagesIndexRouteImport } from './routes/{-$locale}/(pages)/index'
 import { Route as Char123LocaleChar125AppProRouteImport } from './routes/{-$locale}/app/pro'
 import { Route as Char123LocaleChar125AppFeedbackRouteImport } from './routes/{-$locale}/app/feedback'
 import { Route as Char123LocaleChar125AppAccountRouteImport } from './routes/{-$locale}/app/account'
@@ -36,14 +31,17 @@ import { Route as Char123LocaleChar125AdminWaitlistRouteImport } from './routes/
 import { Route as Char123LocaleChar125AdminUsersRouteImport } from './routes/{-$locale}/admin/users'
 import { Route as Char123LocaleChar125AdminSponsorsRouteImport } from './routes/{-$locale}/admin/sponsors'
 import { Route as Char123LocaleChar125AdminFeedbackRouteImport } from './routes/{-$locale}/admin/feedback'
+import { Route as Char123LocaleChar125pagesWaitlistRouteImport } from './routes/{-$locale}/(pages)/waitlist'
+import { Route as Char123LocaleChar125pagesTermsRouteImport } from './routes/{-$locale}/(pages)/terms'
+import { Route as Char123LocaleChar125pagesSponsorRouteImport } from './routes/{-$locale}/(pages)/sponsor'
+import { Route as Char123LocaleChar125pagesPrivacyRouteImport } from './routes/{-$locale}/(pages)/privacy'
+import { Route as Char123LocaleChar125pagesPricingRouteImport } from './routes/{-$locale}/(pages)/pricing'
+import { Route as Char123LocaleChar125pagesChangelogRouteImport } from './routes/{-$locale}/(pages)/changelog'
 import { Route as Char123LocaleChar125authVerifyEmailRouteImport } from './routes/{-$locale}/(auth)/verify-email'
 import { Route as Char123LocaleChar125authResetPasswordRouteImport } from './routes/{-$locale}/(auth)/reset-password'
 import { Route as Char123LocaleChar125authRegisterRouteImport } from './routes/{-$locale}/(auth)/register'
 import { Route as Char123LocaleChar125authLoginRouteImport } from './routes/{-$locale}/(auth)/login'
 import { Route as Char123LocaleChar125authForgotPasswordRouteImport } from './routes/{-$locale}/(auth)/forgot-password'
-import { Route as ApiWebhooksStripeRouteImport } from './routes/api/webhooks/stripe'
-import { Route as ApiAvatarsSplatRouteImport } from './routes/api/avatars/$'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -71,48 +69,6 @@ const Char123LocaleChar125RouteRoute =
     path: '/{-$locale}',
     getParentRoute: () => rootRouteImport,
   } as any)
-const Char123LocaleChar125IndexRoute =
-  Char123LocaleChar125IndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125WaitlistRoute =
-  Char123LocaleChar125WaitlistRouteImport.update({
-    id: '/waitlist',
-    path: '/waitlist',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125TermsRoute =
-  Char123LocaleChar125TermsRouteImport.update({
-    id: '/terms',
-    path: '/terms',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125SponsorRoute =
-  Char123LocaleChar125SponsorRouteImport.update({
-    id: '/sponsor',
-    path: '/sponsor',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125PrivacyRoute =
-  Char123LocaleChar125PrivacyRouteImport.update({
-    id: '/privacy',
-    path: '/privacy',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125PricingRoute =
-  Char123LocaleChar125PricingRouteImport.update({
-    id: '/pricing',
-    path: '/pricing',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
-const Char123LocaleChar125ChangelogRoute =
-  Char123LocaleChar125ChangelogRouteImport.update({
-    id: '/changelog',
-    path: '/changelog',
-    getParentRoute: () => Char123LocaleChar125RouteRoute,
-  } as any)
 const DocsSplatRoute = DocsSplatRouteImport.update({
   id: '/docs/$',
   path: '/docs/$',
@@ -123,9 +79,9 @@ const DocsMdSplatRoute = DocsMdSplatRouteImport.update({
   path: '/docs-md/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiSearchRoute = ApiSearchRouteImport.update({
-  id: '/api/search',
-  path: '/api/search',
+const ApiSplatRoute = ApiSplatRouteImport.update({
+  id: '/api/$',
+  path: '/api/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminWaitlistDotcsvRoute = AdminWaitlistDotcsvRouteImport.update({
@@ -144,6 +100,11 @@ const Char123LocaleChar125AdminRouteRoute =
     path: '/admin',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
+const Char123LocaleChar125pagesRouteRoute =
+  Char123LocaleChar125pagesRouteRouteImport.update({
+    id: '/(pages)',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
 const Char123LocaleChar125AppIndexRoute =
   Char123LocaleChar125AppIndexRouteImport.update({
     id: '/app/',
@@ -155,6 +116,12 @@ const Char123LocaleChar125AdminIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => Char123LocaleChar125AdminRouteRoute,
+  } as any)
+const Char123LocaleChar125pagesIndexRoute =
+  Char123LocaleChar125pagesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
   } as any)
 const Char123LocaleChar125AppProRoute =
   Char123LocaleChar125AppProRouteImport.update({
@@ -198,6 +165,42 @@ const Char123LocaleChar125AdminFeedbackRoute =
     path: '/feedback',
     getParentRoute: () => Char123LocaleChar125AdminRouteRoute,
   } as any)
+const Char123LocaleChar125pagesWaitlistRoute =
+  Char123LocaleChar125pagesWaitlistRouteImport.update({
+    id: '/waitlist',
+    path: '/waitlist',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
+  } as any)
+const Char123LocaleChar125pagesTermsRoute =
+  Char123LocaleChar125pagesTermsRouteImport.update({
+    id: '/terms',
+    path: '/terms',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
+  } as any)
+const Char123LocaleChar125pagesSponsorRoute =
+  Char123LocaleChar125pagesSponsorRouteImport.update({
+    id: '/sponsor',
+    path: '/sponsor',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
+  } as any)
+const Char123LocaleChar125pagesPrivacyRoute =
+  Char123LocaleChar125pagesPrivacyRouteImport.update({
+    id: '/privacy',
+    path: '/privacy',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
+  } as any)
+const Char123LocaleChar125pagesPricingRoute =
+  Char123LocaleChar125pagesPricingRouteImport.update({
+    id: '/pricing',
+    path: '/pricing',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
+  } as any)
+const Char123LocaleChar125pagesChangelogRoute =
+  Char123LocaleChar125pagesChangelogRouteImport.update({
+    id: '/changelog',
+    path: '/changelog',
+    getParentRoute: () => Char123LocaleChar125pagesRouteRoute,
+  } as any)
 const Char123LocaleChar125authVerifyEmailRoute =
   Char123LocaleChar125authVerifyEmailRouteImport.update({
     id: '/(auth)/verify-email',
@@ -228,24 +231,9 @@ const Char123LocaleChar125authForgotPasswordRoute =
     path: '/forgot-password',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
-const ApiWebhooksStripeRoute = ApiWebhooksStripeRouteImport.update({
-  id: '/api/webhooks/stripe',
-  path: '/api/webhooks/stripe',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAvatarsSplatRoute = ApiAvatarsSplatRouteImport.update({
-  id: '/api/avatars/$',
-  path: '/api/avatars/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
-  '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
+  '/{-$locale}': typeof Char123LocaleChar125pagesRouteRouteWithChildren
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -253,24 +241,20 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/admin': typeof Char123LocaleChar125AdminRouteRouteWithChildren
   '/admin/sponsors.csv': typeof AdminSponsorsDotcsvRoute
   '/admin/waitlist.csv': typeof AdminWaitlistDotcsvRoute
-  '/api/search': typeof ApiSearchRoute
+  '/api/$': typeof ApiSplatRoute
   '/docs-md/$': typeof DocsMdSplatRoute
   '/docs/$': typeof DocsSplatRoute
-  '/{-$locale}/changelog': typeof Char123LocaleChar125ChangelogRoute
-  '/{-$locale}/pricing': typeof Char123LocaleChar125PricingRoute
-  '/{-$locale}/privacy': typeof Char123LocaleChar125PrivacyRoute
-  '/{-$locale}/sponsor': typeof Char123LocaleChar125SponsorRoute
-  '/{-$locale}/terms': typeof Char123LocaleChar125TermsRoute
-  '/{-$locale}/waitlist': typeof Char123LocaleChar125WaitlistRoute
-  '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/avatars/$': typeof ApiAvatarsSplatRoute
-  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/{-$locale}/forgot-password': typeof Char123LocaleChar125authForgotPasswordRoute
   '/{-$locale}/login': typeof Char123LocaleChar125authLoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125authRegisterRoute
   '/{-$locale}/reset-password': typeof Char123LocaleChar125authResetPasswordRoute
   '/{-$locale}/verify-email': typeof Char123LocaleChar125authVerifyEmailRoute
+  '/{-$locale}/changelog': typeof Char123LocaleChar125pagesChangelogRoute
+  '/{-$locale}/pricing': typeof Char123LocaleChar125pagesPricingRoute
+  '/{-$locale}/privacy': typeof Char123LocaleChar125pagesPrivacyRoute
+  '/{-$locale}/sponsor': typeof Char123LocaleChar125pagesSponsorRoute
+  '/{-$locale}/terms': typeof Char123LocaleChar125pagesTermsRoute
+  '/{-$locale}/waitlist': typeof Char123LocaleChar125pagesWaitlistRoute
   '/{-$locale}/admin/feedback': typeof Char123LocaleChar125AdminFeedbackRoute
   '/{-$locale}/admin/sponsors': typeof Char123LocaleChar125AdminSponsorsRoute
   '/{-$locale}/admin/users': typeof Char123LocaleChar125AdminUsersRoute
@@ -278,34 +262,32 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/app/account': typeof Char123LocaleChar125AppAccountRoute
   '/{-$locale}/app/feedback': typeof Char123LocaleChar125AppFeedbackRoute
   '/{-$locale}/app/pro': typeof Char123LocaleChar125AppProRoute
+  '/{-$locale}/': typeof Char123LocaleChar125pagesIndexRoute
   '/{-$locale}/admin/': typeof Char123LocaleChar125AdminIndexRoute
   '/{-$locale}/app/': typeof Char123LocaleChar125AppIndexRoute
 }
 export interface FileRoutesByTo {
+  '/{-$locale}': typeof Char123LocaleChar125pagesIndexRoute
   '/llms-full.txt': typeof LlmsFullDottxtRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/sponsors.csv': typeof AdminSponsorsDotcsvRoute
   '/admin/waitlist.csv': typeof AdminWaitlistDotcsvRoute
-  '/api/search': typeof ApiSearchRoute
+  '/api/$': typeof ApiSplatRoute
   '/docs-md/$': typeof DocsMdSplatRoute
   '/docs/$': typeof DocsSplatRoute
-  '/{-$locale}/changelog': typeof Char123LocaleChar125ChangelogRoute
-  '/{-$locale}/pricing': typeof Char123LocaleChar125PricingRoute
-  '/{-$locale}/privacy': typeof Char123LocaleChar125PrivacyRoute
-  '/{-$locale}/sponsor': typeof Char123LocaleChar125SponsorRoute
-  '/{-$locale}/terms': typeof Char123LocaleChar125TermsRoute
-  '/{-$locale}/waitlist': typeof Char123LocaleChar125WaitlistRoute
-  '/{-$locale}': typeof Char123LocaleChar125IndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/avatars/$': typeof ApiAvatarsSplatRoute
-  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/{-$locale}/forgot-password': typeof Char123LocaleChar125authForgotPasswordRoute
   '/{-$locale}/login': typeof Char123LocaleChar125authLoginRoute
   '/{-$locale}/register': typeof Char123LocaleChar125authRegisterRoute
   '/{-$locale}/reset-password': typeof Char123LocaleChar125authResetPasswordRoute
   '/{-$locale}/verify-email': typeof Char123LocaleChar125authVerifyEmailRoute
+  '/{-$locale}/changelog': typeof Char123LocaleChar125pagesChangelogRoute
+  '/{-$locale}/pricing': typeof Char123LocaleChar125pagesPricingRoute
+  '/{-$locale}/privacy': typeof Char123LocaleChar125pagesPrivacyRoute
+  '/{-$locale}/sponsor': typeof Char123LocaleChar125pagesSponsorRoute
+  '/{-$locale}/terms': typeof Char123LocaleChar125pagesTermsRoute
+  '/{-$locale}/waitlist': typeof Char123LocaleChar125pagesWaitlistRoute
   '/{-$locale}/admin/feedback': typeof Char123LocaleChar125AdminFeedbackRoute
   '/{-$locale}/admin/sponsors': typeof Char123LocaleChar125AdminSponsorsRoute
   '/{-$locale}/admin/users': typeof Char123LocaleChar125AdminUsersRoute
@@ -323,27 +305,24 @@ export interface FileRoutesById {
   '/llms.txt': typeof LlmsDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/{-$locale}/(pages)': typeof Char123LocaleChar125pagesRouteRouteWithChildren
   '/{-$locale}/admin': typeof Char123LocaleChar125AdminRouteRouteWithChildren
   '/admin/sponsors.csv': typeof AdminSponsorsDotcsvRoute
   '/admin/waitlist.csv': typeof AdminWaitlistDotcsvRoute
-  '/api/search': typeof ApiSearchRoute
+  '/api/$': typeof ApiSplatRoute
   '/docs-md/$': typeof DocsMdSplatRoute
   '/docs/$': typeof DocsSplatRoute
-  '/{-$locale}/changelog': typeof Char123LocaleChar125ChangelogRoute
-  '/{-$locale}/pricing': typeof Char123LocaleChar125PricingRoute
-  '/{-$locale}/privacy': typeof Char123LocaleChar125PrivacyRoute
-  '/{-$locale}/sponsor': typeof Char123LocaleChar125SponsorRoute
-  '/{-$locale}/terms': typeof Char123LocaleChar125TermsRoute
-  '/{-$locale}/waitlist': typeof Char123LocaleChar125WaitlistRoute
-  '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/avatars/$': typeof ApiAvatarsSplatRoute
-  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/{-$locale}/(auth)/forgot-password': typeof Char123LocaleChar125authForgotPasswordRoute
   '/{-$locale}/(auth)/login': typeof Char123LocaleChar125authLoginRoute
   '/{-$locale}/(auth)/register': typeof Char123LocaleChar125authRegisterRoute
   '/{-$locale}/(auth)/reset-password': typeof Char123LocaleChar125authResetPasswordRoute
   '/{-$locale}/(auth)/verify-email': typeof Char123LocaleChar125authVerifyEmailRoute
+  '/{-$locale}/(pages)/changelog': typeof Char123LocaleChar125pagesChangelogRoute
+  '/{-$locale}/(pages)/pricing': typeof Char123LocaleChar125pagesPricingRoute
+  '/{-$locale}/(pages)/privacy': typeof Char123LocaleChar125pagesPrivacyRoute
+  '/{-$locale}/(pages)/sponsor': typeof Char123LocaleChar125pagesSponsorRoute
+  '/{-$locale}/(pages)/terms': typeof Char123LocaleChar125pagesTermsRoute
+  '/{-$locale}/(pages)/waitlist': typeof Char123LocaleChar125pagesWaitlistRoute
   '/{-$locale}/admin/feedback': typeof Char123LocaleChar125AdminFeedbackRoute
   '/{-$locale}/admin/sponsors': typeof Char123LocaleChar125AdminSponsorsRoute
   '/{-$locale}/admin/users': typeof Char123LocaleChar125AdminUsersRoute
@@ -351,6 +330,7 @@ export interface FileRoutesById {
   '/{-$locale}/app/account': typeof Char123LocaleChar125AppAccountRoute
   '/{-$locale}/app/feedback': typeof Char123LocaleChar125AppFeedbackRoute
   '/{-$locale}/app/pro': typeof Char123LocaleChar125AppProRoute
+  '/{-$locale}/(pages)/': typeof Char123LocaleChar125pagesIndexRoute
   '/{-$locale}/admin/': typeof Char123LocaleChar125AdminIndexRoute
   '/{-$locale}/app/': typeof Char123LocaleChar125AppIndexRoute
 }
@@ -365,24 +345,20 @@ export interface FileRouteTypes {
     | '/{-$locale}/admin'
     | '/admin/sponsors.csv'
     | '/admin/waitlist.csv'
-    | '/api/search'
+    | '/api/$'
     | '/docs-md/$'
     | '/docs/$'
+    | '/{-$locale}/forgot-password'
+    | '/{-$locale}/login'
+    | '/{-$locale}/register'
+    | '/{-$locale}/reset-password'
+    | '/{-$locale}/verify-email'
     | '/{-$locale}/changelog'
     | '/{-$locale}/pricing'
     | '/{-$locale}/privacy'
     | '/{-$locale}/sponsor'
     | '/{-$locale}/terms'
     | '/{-$locale}/waitlist'
-    | '/{-$locale}/'
-    | '/api/auth/$'
-    | '/api/avatars/$'
-    | '/api/webhooks/stripe'
-    | '/{-$locale}/forgot-password'
-    | '/{-$locale}/login'
-    | '/{-$locale}/register'
-    | '/{-$locale}/reset-password'
-    | '/{-$locale}/verify-email'
     | '/{-$locale}/admin/feedback'
     | '/{-$locale}/admin/sponsors'
     | '/{-$locale}/admin/users'
@@ -390,34 +366,32 @@ export interface FileRouteTypes {
     | '/{-$locale}/app/account'
     | '/{-$locale}/app/feedback'
     | '/{-$locale}/app/pro'
+    | '/{-$locale}/'
     | '/{-$locale}/admin/'
     | '/{-$locale}/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/{-$locale}'
     | '/llms-full.txt'
     | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/admin/sponsors.csv'
     | '/admin/waitlist.csv'
-    | '/api/search'
+    | '/api/$'
     | '/docs-md/$'
     | '/docs/$'
+    | '/{-$locale}/forgot-password'
+    | '/{-$locale}/login'
+    | '/{-$locale}/register'
+    | '/{-$locale}/reset-password'
+    | '/{-$locale}/verify-email'
     | '/{-$locale}/changelog'
     | '/{-$locale}/pricing'
     | '/{-$locale}/privacy'
     | '/{-$locale}/sponsor'
     | '/{-$locale}/terms'
     | '/{-$locale}/waitlist'
-    | '/{-$locale}'
-    | '/api/auth/$'
-    | '/api/avatars/$'
-    | '/api/webhooks/stripe'
-    | '/{-$locale}/forgot-password'
-    | '/{-$locale}/login'
-    | '/{-$locale}/register'
-    | '/{-$locale}/reset-password'
-    | '/{-$locale}/verify-email'
     | '/{-$locale}/admin/feedback'
     | '/{-$locale}/admin/sponsors'
     | '/{-$locale}/admin/users'
@@ -434,27 +408,24 @@ export interface FileRouteTypes {
     | '/llms.txt'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/{-$locale}/(pages)'
     | '/{-$locale}/admin'
     | '/admin/sponsors.csv'
     | '/admin/waitlist.csv'
-    | '/api/search'
+    | '/api/$'
     | '/docs-md/$'
     | '/docs/$'
-    | '/{-$locale}/changelog'
-    | '/{-$locale}/pricing'
-    | '/{-$locale}/privacy'
-    | '/{-$locale}/sponsor'
-    | '/{-$locale}/terms'
-    | '/{-$locale}/waitlist'
-    | '/{-$locale}/'
-    | '/api/auth/$'
-    | '/api/avatars/$'
-    | '/api/webhooks/stripe'
     | '/{-$locale}/(auth)/forgot-password'
     | '/{-$locale}/(auth)/login'
     | '/{-$locale}/(auth)/register'
     | '/{-$locale}/(auth)/reset-password'
     | '/{-$locale}/(auth)/verify-email'
+    | '/{-$locale}/(pages)/changelog'
+    | '/{-$locale}/(pages)/pricing'
+    | '/{-$locale}/(pages)/privacy'
+    | '/{-$locale}/(pages)/sponsor'
+    | '/{-$locale}/(pages)/terms'
+    | '/{-$locale}/(pages)/waitlist'
     | '/{-$locale}/admin/feedback'
     | '/{-$locale}/admin/sponsors'
     | '/{-$locale}/admin/users'
@@ -462,6 +433,7 @@ export interface FileRouteTypes {
     | '/{-$locale}/app/account'
     | '/{-$locale}/app/feedback'
     | '/{-$locale}/app/pro'
+    | '/{-$locale}/(pages)/'
     | '/{-$locale}/admin/'
     | '/{-$locale}/app/'
   fileRoutesById: FileRoutesById
@@ -474,12 +446,9 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminSponsorsDotcsvRoute: typeof AdminSponsorsDotcsvRoute
   AdminWaitlistDotcsvRoute: typeof AdminWaitlistDotcsvRoute
-  ApiSearchRoute: typeof ApiSearchRoute
+  ApiSplatRoute: typeof ApiSplatRoute
   DocsMdSplatRoute: typeof DocsMdSplatRoute
   DocsSplatRoute: typeof DocsSplatRoute
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ApiAvatarsSplatRoute: typeof ApiAvatarsSplatRoute
-  ApiWebhooksStripeRoute: typeof ApiWebhooksStripeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -519,55 +488,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125RouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/{-$locale}/': {
-      id: '/{-$locale}/'
-      path: '/'
-      fullPath: '/{-$locale}/'
-      preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/waitlist': {
-      id: '/{-$locale}/waitlist'
-      path: '/waitlist'
-      fullPath: '/{-$locale}/waitlist'
-      preLoaderRoute: typeof Char123LocaleChar125WaitlistRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/terms': {
-      id: '/{-$locale}/terms'
-      path: '/terms'
-      fullPath: '/{-$locale}/terms'
-      preLoaderRoute: typeof Char123LocaleChar125TermsRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/sponsor': {
-      id: '/{-$locale}/sponsor'
-      path: '/sponsor'
-      fullPath: '/{-$locale}/sponsor'
-      preLoaderRoute: typeof Char123LocaleChar125SponsorRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/privacy': {
-      id: '/{-$locale}/privacy'
-      path: '/privacy'
-      fullPath: '/{-$locale}/privacy'
-      preLoaderRoute: typeof Char123LocaleChar125PrivacyRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/pricing': {
-      id: '/{-$locale}/pricing'
-      path: '/pricing'
-      fullPath: '/{-$locale}/pricing'
-      preLoaderRoute: typeof Char123LocaleChar125PricingRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
-    '/{-$locale}/changelog': {
-      id: '/{-$locale}/changelog'
-      path: '/changelog'
-      fullPath: '/{-$locale}/changelog'
-      preLoaderRoute: typeof Char123LocaleChar125ChangelogRouteImport
-      parentRoute: typeof Char123LocaleChar125RouteRoute
-    }
     '/docs/$': {
       id: '/docs/$'
       path: '/docs/$'
@@ -582,11 +502,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsMdSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/search': {
-      id: '/api/search'
-      path: '/api/search'
-      fullPath: '/api/search'
-      preLoaderRoute: typeof ApiSearchRouteImport
+    '/api/$': {
+      id: '/api/$'
+      path: '/api/$'
+      fullPath: '/api/$'
+      preLoaderRoute: typeof ApiSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/waitlist.csv': {
@@ -610,6 +530,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AdminRouteRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
+    '/{-$locale}/(pages)': {
+      id: '/{-$locale}/(pages)'
+      path: ''
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125pagesRouteRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
     '/{-$locale}/app/': {
       id: '/{-$locale}/app/'
       path: '/app'
@@ -623,6 +550,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/{-$locale}/admin/'
       preLoaderRoute: typeof Char123LocaleChar125AdminIndexRouteImport
       parentRoute: typeof Char123LocaleChar125AdminRouteRoute
+    }
+    '/{-$locale}/(pages)/': {
+      id: '/{-$locale}/(pages)/'
+      path: '/'
+      fullPath: '/{-$locale}/'
+      preLoaderRoute: typeof Char123LocaleChar125pagesIndexRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
     }
     '/{-$locale}/app/pro': {
       id: '/{-$locale}/app/pro'
@@ -673,6 +607,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125AdminFeedbackRouteImport
       parentRoute: typeof Char123LocaleChar125AdminRouteRoute
     }
+    '/{-$locale}/(pages)/waitlist': {
+      id: '/{-$locale}/(pages)/waitlist'
+      path: '/waitlist'
+      fullPath: '/{-$locale}/waitlist'
+      preLoaderRoute: typeof Char123LocaleChar125pagesWaitlistRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
+    }
+    '/{-$locale}/(pages)/terms': {
+      id: '/{-$locale}/(pages)/terms'
+      path: '/terms'
+      fullPath: '/{-$locale}/terms'
+      preLoaderRoute: typeof Char123LocaleChar125pagesTermsRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
+    }
+    '/{-$locale}/(pages)/sponsor': {
+      id: '/{-$locale}/(pages)/sponsor'
+      path: '/sponsor'
+      fullPath: '/{-$locale}/sponsor'
+      preLoaderRoute: typeof Char123LocaleChar125pagesSponsorRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
+    }
+    '/{-$locale}/(pages)/privacy': {
+      id: '/{-$locale}/(pages)/privacy'
+      path: '/privacy'
+      fullPath: '/{-$locale}/privacy'
+      preLoaderRoute: typeof Char123LocaleChar125pagesPrivacyRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
+    }
+    '/{-$locale}/(pages)/pricing': {
+      id: '/{-$locale}/(pages)/pricing'
+      path: '/pricing'
+      fullPath: '/{-$locale}/pricing'
+      preLoaderRoute: typeof Char123LocaleChar125pagesPricingRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
+    }
+    '/{-$locale}/(pages)/changelog': {
+      id: '/{-$locale}/(pages)/changelog'
+      path: '/changelog'
+      fullPath: '/{-$locale}/changelog'
+      preLoaderRoute: typeof Char123LocaleChar125pagesChangelogRouteImport
+      parentRoute: typeof Char123LocaleChar125pagesRouteRoute
+    }
     '/{-$locale}/(auth)/verify-email': {
       id: '/{-$locale}/(auth)/verify-email'
       path: '/verify-email'
@@ -708,29 +684,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125authForgotPasswordRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
-    '/api/webhooks/stripe': {
-      id: '/api/webhooks/stripe'
-      path: '/api/webhooks/stripe'
-      fullPath: '/api/webhooks/stripe'
-      preLoaderRoute: typeof ApiWebhooksStripeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/avatars/$': {
-      id: '/api/avatars/$'
-      path: '/api/avatars/$'
-      fullPath: '/api/avatars/$'
-      preLoaderRoute: typeof ApiAvatarsSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
+
+interface Char123LocaleChar125pagesRouteRouteChildren {
+  Char123LocaleChar125pagesChangelogRoute: typeof Char123LocaleChar125pagesChangelogRoute
+  Char123LocaleChar125pagesPricingRoute: typeof Char123LocaleChar125pagesPricingRoute
+  Char123LocaleChar125pagesPrivacyRoute: typeof Char123LocaleChar125pagesPrivacyRoute
+  Char123LocaleChar125pagesSponsorRoute: typeof Char123LocaleChar125pagesSponsorRoute
+  Char123LocaleChar125pagesTermsRoute: typeof Char123LocaleChar125pagesTermsRoute
+  Char123LocaleChar125pagesWaitlistRoute: typeof Char123LocaleChar125pagesWaitlistRoute
+  Char123LocaleChar125pagesIndexRoute: typeof Char123LocaleChar125pagesIndexRoute
+}
+
+const Char123LocaleChar125pagesRouteRouteChildren: Char123LocaleChar125pagesRouteRouteChildren =
+  {
+    Char123LocaleChar125pagesChangelogRoute:
+      Char123LocaleChar125pagesChangelogRoute,
+    Char123LocaleChar125pagesPricingRoute:
+      Char123LocaleChar125pagesPricingRoute,
+    Char123LocaleChar125pagesPrivacyRoute:
+      Char123LocaleChar125pagesPrivacyRoute,
+    Char123LocaleChar125pagesSponsorRoute:
+      Char123LocaleChar125pagesSponsorRoute,
+    Char123LocaleChar125pagesTermsRoute: Char123LocaleChar125pagesTermsRoute,
+    Char123LocaleChar125pagesWaitlistRoute:
+      Char123LocaleChar125pagesWaitlistRoute,
+    Char123LocaleChar125pagesIndexRoute: Char123LocaleChar125pagesIndexRoute,
+  }
+
+const Char123LocaleChar125pagesRouteRouteWithChildren =
+  Char123LocaleChar125pagesRouteRoute._addFileChildren(
+    Char123LocaleChar125pagesRouteRouteChildren,
+  )
 
 interface Char123LocaleChar125AdminRouteRouteChildren {
   Char123LocaleChar125AdminFeedbackRoute: typeof Char123LocaleChar125AdminFeedbackRoute
@@ -758,14 +744,8 @@ const Char123LocaleChar125AdminRouteRouteWithChildren =
   )
 
 interface Char123LocaleChar125RouteRouteChildren {
+  Char123LocaleChar125pagesRouteRoute: typeof Char123LocaleChar125pagesRouteRouteWithChildren
   Char123LocaleChar125AdminRouteRoute: typeof Char123LocaleChar125AdminRouteRouteWithChildren
-  Char123LocaleChar125ChangelogRoute: typeof Char123LocaleChar125ChangelogRoute
-  Char123LocaleChar125PricingRoute: typeof Char123LocaleChar125PricingRoute
-  Char123LocaleChar125PrivacyRoute: typeof Char123LocaleChar125PrivacyRoute
-  Char123LocaleChar125SponsorRoute: typeof Char123LocaleChar125SponsorRoute
-  Char123LocaleChar125TermsRoute: typeof Char123LocaleChar125TermsRoute
-  Char123LocaleChar125WaitlistRoute: typeof Char123LocaleChar125WaitlistRoute
-  Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
   Char123LocaleChar125authForgotPasswordRoute: typeof Char123LocaleChar125authForgotPasswordRoute
   Char123LocaleChar125authLoginRoute: typeof Char123LocaleChar125authLoginRoute
   Char123LocaleChar125authRegisterRoute: typeof Char123LocaleChar125authRegisterRoute
@@ -779,15 +759,10 @@ interface Char123LocaleChar125RouteRouteChildren {
 
 const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChildren =
   {
+    Char123LocaleChar125pagesRouteRoute:
+      Char123LocaleChar125pagesRouteRouteWithChildren,
     Char123LocaleChar125AdminRouteRoute:
       Char123LocaleChar125AdminRouteRouteWithChildren,
-    Char123LocaleChar125ChangelogRoute: Char123LocaleChar125ChangelogRoute,
-    Char123LocaleChar125PricingRoute: Char123LocaleChar125PricingRoute,
-    Char123LocaleChar125PrivacyRoute: Char123LocaleChar125PrivacyRoute,
-    Char123LocaleChar125SponsorRoute: Char123LocaleChar125SponsorRoute,
-    Char123LocaleChar125TermsRoute: Char123LocaleChar125TermsRoute,
-    Char123LocaleChar125WaitlistRoute: Char123LocaleChar125WaitlistRoute,
-    Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
     Char123LocaleChar125authForgotPasswordRoute:
       Char123LocaleChar125authForgotPasswordRoute,
     Char123LocaleChar125authLoginRoute: Char123LocaleChar125authLoginRoute,
@@ -816,12 +791,9 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminSponsorsDotcsvRoute: AdminSponsorsDotcsvRoute,
   AdminWaitlistDotcsvRoute: AdminWaitlistDotcsvRoute,
-  ApiSearchRoute: ApiSearchRoute,
+  ApiSplatRoute: ApiSplatRoute,
   DocsMdSplatRoute: DocsMdSplatRoute,
   DocsSplatRoute: DocsSplatRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute,
-  ApiAvatarsSplatRoute: ApiAvatarsSplatRoute,
-  ApiWebhooksStripeRoute: ApiWebhooksStripeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
